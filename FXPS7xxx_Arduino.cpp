@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 ryrak
+ * Copyright 2023 ryraki
  * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
@@ -18,6 +18,10 @@
 uint8_t FXPS7xxx_Arduino::init() {
   uint8_t data = 0;
   uint8_t stat = 0;
+  if (comType == FXPS7XXX_ANA) {
+    pinMode(A0, INPUT);
+    return SENSOR_SUCCESS;
+  }
   reset();
   delay(100);
   if (comType == FXPS7XXX_SPI) {
@@ -42,6 +46,8 @@ uint8_t FXPS7xxx_Arduino::init() {
 }
 
 void FXPS7xxx_Arduino::reset() {
+  if (comType == FXPS7XXX_ANA)
+    return;
   write_reg(FXPS7XXX_DEVLOCK_WR, FXPS7XXX_DEVLOCK_WR_RESET00);
   write_reg(FXPS7XXX_DEVLOCK_WR, FXPS7XXX_DEVLOCK_WR_RESET11);
   write_reg(FXPS7XXX_DEVLOCK_WR, FXPS7XXX_DEVLOCK_WR_RESET01);
@@ -190,6 +196,9 @@ uint8_t FXPS7xxx_Arduino::access_reg_spi(uint8_t *p_spi_txdata) {
 }
 
 float FXPS7xxx_Arduino::get_pressure(uint8_t sensor) {
+  if (comType == FXPS7XXX_ANA) {
+    return analogRead(A0)/1023.0*250.0+10;
+  }
   if (sensor >= 2) return -1;
   uint8_t data[2] = {0};
   if (sensor == 0)

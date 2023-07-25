@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 ryrak
+ * Copyright 2023 ryraki
  * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
@@ -26,6 +26,7 @@
 
 #define P_RANGE static_cast<uint8_t>(P_range)
 
+#define FXPS7250A FXPS7XXX_ANA,FXPS7xxx_Arduino::pressureRange::P250  //!< @brief Used for FXPS7250A4 at constructor 
 #define FXPS7115S FXPS7XXX_SPI,FXPS7xxx_Arduino::pressureRange::P115  //!< @brief Used for FXPS7115D4 SPI version at constructor 
 #define FXPS7115I FXPS7XXX_I2C,FXPS7xxx_Arduino::pressureRange::P115  //!< @brief Used for FXPS7115D4 I2C version at constructor 
 #define FXPS7250S FXPS7XXX_SPI,FXPS7xxx_Arduino::pressureRange::P250  //!< @brief Used for FXPS7250D4 SPI version at constructor 
@@ -73,7 +74,7 @@ class FXPS7xxx_Arduino {
     /**
     * @brief Reset function: To send 00->11->01 to DEVLOCK_WR[RESET]
     */
-    void FXPS7xxx_Arduino::reset();
+    void reset();
     
     /**
     * @brief Register read function: Interface is selected automatically
