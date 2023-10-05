@@ -1,8 +1,8 @@
 # FXPS7xxx_Arduino
 This library enables the developer to evaluate NXP FXPS7xxx with Arduino
 
-> **Known Issues**
-This library is not used for 165, 400, 550kPa and Analog. Will be supported.
+> **Note**
+Known Issue: This library doesn't fully support 165, 400, 550kPa devices though the library still be functionable for these devices. Will be fully supported.
 
 ## Usage of this library
 Put your FXPS7xxx on your Arduino. Arduino Uno can adopt FXPS7xxx shield board without any changes.
